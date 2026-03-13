@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stm32="https://developer.st.com/schemas/stm32cube/1.0.0" schemaVersion="1.7.55" xsi:noNamespaceSchemaLocation="PACK.xsd" xsi:schemaLocation="https://developer.st.com/schemas/stm32cube/1.0.0 stm32cube.xsd" Dvendor="STMicroelectronics:13" Dname="STM32*">
+  <vendor>STMicroelectronics</vendor>
+  <name>sequencer</name>
+  <environments>
+    <environment name="STM32Cube">
+      <stm32:pack type="UTILITY" friendlyName="sequencer" shortDesc="Sequencer utility">
+        <relocation-info parent="utilities" layer="" element=""/>
+      </stm32:pack>
+    </environment>
+  </environments>
+  <ECCN>
+    <ECCN-EU>NEC</ECCN-EU>
+    <ECCN-US>EAR99</ECCN-US>
+  </ECCN>
+  <description>Pack with basic bare metal utility</description>
+  <url>https://developer.st.com/st-pack-server/api/v1/pack/</url>
+  <repository type="git">https://github.com/STMicroelectronics/stm32-util-sequencer</repository>
+  <license>LICENSE.md</license>
+  <changelogs>
+    <changelog id="Release Notes" name="Release_Notes.html"/>
+  </changelogs>
+  <releases>
+    <release version="2.0.0" date="2026-03-13">
+      Refer to Release_Notes.html for release details.
+    </release>
+  </releases>
+  <keywords>
+    <keyword>STMicroelectronics</keyword>
+    <keyword>ST</keyword>
+    <keyword>STM32</keyword>
+    <keyword>Utility</keyword>
+    <keyword>Sequencer</keyword>
+    <keyword>Task</keyword>
+    <keyword>Event</keyword>
+  </keywords>
+  <conditions>
+    <condition id="Seq Config">
+      <description>STMicroelectronics Utility Sequencer Config</description>
+      <require Cclass="Utility" Cgroup="SEQUENCER" Csub="Core"/>
+    </condition>
+  </conditions>
+  <!-- This generator is launched if any component referencing this generator by 'id' is selected and the specified <gpdsc> file does not exist -->
+  <generators>
+    <!-- This generator is launched if any component referencing this generator by 'id' is selected and the specified <gpdsc> file does not exist -->
+    <generator id="sequencer_mx2codegen">
+      <description>ST Microelectronics: STM32 Cube Code Generator for utility Sequencer Pack</description>
+      <exe>
+        <command host="win">.config/gen_code.bat</command>
+        <command host="linux">.config/gen_code.sh</command>
+        <command host="mac">.config/gen_code.sh</command>
+        <!-- passing the generator name-->
+        <argument>sequencer_mx2codegen</argument>
+        <argument>$G</argument>
+        <!-- #name of the gpdsc template contained in this PACK and aligned with GPDSC name-->
+        <argument>STMicroelectronics.sequencer.gpdsc.hbs</argument>
+        <!-- Flag to indicate that this Generator is dry-run capable -->
+        <argument mode="dry-run">--dry-run</argument>
+      </exe>
+      <!-- <workingDir>$P</workingDir> -->
+      <!-- path is specified either absolute or relative to PDSC or GPDSC file. If not specified it is the project directory configured by the environment  -->
+      <gpdsc name="$P/STMicroelectronics.sequencer.gpdsc"/>
+    </generator>
+  </generators>
+  <!-- end of codegen -->
+  <components>
+    <component generator="sequencer_mx2codegen" Cclass="Utility" Cgroup="STM32CubeMX2 Config" Csub="SEQUENCER" Cversion="1.0.0" condition="Seq Config">
+      <description> Code Generation for Sequencer utility</description>
+      <environments>
+        <environment name="STM32Cube">
+        </environment>
+      </environments>
+      <files>
+        <file category="genAsset" name=".config/gen_code.bat"/>
+        <file category="genAsset" name=".config/gen_code.sh"/>
+        <file category="genAsset" name=".config/sequencer_config_parameters.json"/>
+        <file category="genAsset" name=".config/STMicroelectronics.sequencer.gpdsc.hbs"/>
+        <file category="genAsset" name=".config/template/seq_user_conf_template.h.hbs"/>
+        <file category="genAsset" name=".config/template/mx_seq_template.c.hbs"/>
+        <file category="genAsset" name=".config/template/mx_seq_template.h.hbs"/>
+        <!-- License files -->
+        <file category="genAsset" name=".config/template/partials/LICENSE_partial.hbs"/>
+        <file category="genAsset" name=".config/template/license/mx_sequencer_license_template.md.hbs"/>
+      </files>
+    </component>
+    <component Cvendor="STMicroelectronics" Cclass="Utility" Cgroup="SEQUENCER" Csub="Core" Cversion="1.0.0">
+      <description>Utility Sequencer (SEQ) driver </description>
+      <files>
+        <file category="source" name="sequencer.c"/>
+        <file category="header" name="sequencer.h"/>
+        <file category="doc" name="README.md"/>
+        <file category="doc" name="SW_Security_Level.md"/>
+        <file category="header" name="templates/seq_user_conf_template.h"/>
+      </files>
+    </component>
+  </components>
+</package>
