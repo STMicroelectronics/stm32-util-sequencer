@@ -6,6 +6,38 @@
     <environment name="STM32Cube">
       <stm32:pack type="UTILITY" friendlyName="sequencer" shortDesc="Sequencer utility">
         <relocation-info parent="utilities" layer="" element=""/>
+        <compatibility>
+          <release version="2.1.0">
+            <applicable-schema schemaType="sw-configuration" schemaVersion="3.8.0"/>
+            <applicable-api-group apiType="codegen-getters">
+              <applicable-api apiType="clockAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="DmaAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="EnvVarAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="ExtiAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="hwPlatformAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="NvicAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="peripheralsResourceManagerAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="pinoutAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="SWConfigurationAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="SWProjectAPI" apiVersion="1.0.0"/>
+            </applicable-api-group>
+          </release>
+          <release version="2.0.0">
+            <applicable-schema schemaType="sw-configuration" schemaVersion="3.8.0"/>
+            <applicable-api-group apiType="codegen-getters">
+              <applicable-api apiType="clockAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="DmaAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="EnvVarAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="ExtiAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="hwPlatformAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="NvicAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="peripheralsResourceManagerAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="pinoutAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="SWConfigurationAPI" apiVersion="1.0.0"/>
+              <applicable-api apiType="SWProjectAPI" apiVersion="1.0.0"/>
+            </applicable-api-group>
+          </release>
+        </compatibility>
       </stm32:pack>
     </environment>
   </environments>
@@ -21,6 +53,9 @@
     <changelog id="Release Notes" name="Release_Notes.html"/>
   </changelogs>
   <releases>
+    <release version="2.1.0" date="2026-06-12">
+      Refer to Release_Notes.html for release details.
+    </release>
     <release version="2.0.0" date="2026-03-13">
       Refer to Release_Notes.html for release details.
     </release>
@@ -64,10 +99,13 @@
   </generators>
   <!-- end of codegen -->
   <components>
-    <component generator="sequencer_mx2codegen" Cclass="Utility" Cgroup="STM32CubeMX2 Config" Csub="SEQUENCER" Cversion="1.0.0" condition="Seq Config">
+    <component generator="sequencer_mx2codegen" Cclass="Utility" Cgroup="STM32CubeMX2 Config" Csub="SEQUENCER" Cversion="1.1.0" condition="Seq Config">
       <description> Code Generation for Sequencer utility</description>
       <environments>
         <environment name="STM32Cube">
+          <stm32:component>
+            <utility-entry-point id="Sequencer" name="Sequencer" category="Scheduler Utility"/>
+          </stm32:component>
         </environment>
       </environments>
       <files>

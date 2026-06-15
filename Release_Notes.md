@@ -12,6 +12,47 @@ More documentation is available at [Sequencer SW Pack online documentation](http
 
 # Update history
 
+<label for="collapse-section-2.1.0" aria-hidden="true">__2.1.0 / 12-June-2026__</label>
+<div>
+
+## Main changes
+
+- Add support for STM32CubeMX2 configuration and code generation.
+
+## Contents
+
+- Software package
+  - Core source code and header
+  - Template for user configuration
+  - STM32CubeMX2 configuration and code generation assets
+
+## Supported devices and boards
+
+- STM32C5 series.
+
+## Known Limitations
+
+None.
+
+## Development Toolchains and Compilers
+
+- IAR Embedded Workbench for ARM (EWARM) toolchain V9.60.3 + ST-LINK
+- MDK-ARM Keil uVision V5.42
+- STM32CubeIDE for Visual Studio Code (GCC13 compiler)
+- STM32CubeMX2 version 1.0.1
+
+## Backward compatibility
+
+
+None.
+
+## Dependencies
+
+None.
+
+</div>
+
+
 <label for="collapse-section-2.0.0" aria-hidden="true">__2.0.0 / 13-March-2026__</label>
 <div>
 
@@ -53,12 +94,9 @@ None.
 
 
 
-
-<footer class="sticky">
 For complete documentation on STM32 Microcontrollers </mark> ,
 visit: http://www.st.com/stm32
 
 This release note uses up to date web standards and, for this reason, should not
 be opened with Internet Explorer but preferably with popular browsers such as
 Google Chrome, Mozilla Firefox, Opera or Microsoft Edge.
-</footer>

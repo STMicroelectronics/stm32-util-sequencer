@@ -1,0 +1,67 @@
+{{!--
+  ******************************************************************************
+  * @file           : mx_seq_template.c.hbs
+  * @brief          : Sequencer utility source template for mx_seq.c
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2026 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  ~--}}
+{{assign 'sequencerFilter' (JSONparse '{"cgroup": "STM32CubeMX2 Config", "csub": "SEQUENCER"}')~}}
+{{assign 'sequencer_context' (@root.SWConfigurationAPI.getInstancesConfiguration @root.sequencerFilter)~}}
+{{assign 'sequencer_cxt' @root.sequencer_context.[0].settings.parameters~}}
+{{log "sequencer Config template sequencer_cxt:" (toJSON @root.sequencer_cxt)~}}
+/**
+  ******************************************************************************
+  * @file           : mx_seq.c
+  * @brief          : Sequencer initialization source file
+{{> LICENSE}}
+
+/* Includes ------------------------------------------------------------------*/
+#include "mx_seq.h"
+
+/* Private typedef -----------------------------------------------------------*/
+/* Private defines -----------------------------------------------------------*/
+/* Private macros ------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
+/* Exported functions --------------------------------------------------------*/
+
+/******************************************************************************/
+/* Exported functions for the Sequencer utility                               */
+/******************************************************************************/
+
+{{#with @root.sequencer_cxt~}}
+{{#with additional~}}
+/**
+  * @brief  Initialize the Sequencer and register user tasks.
+  */
+void mx_seq_init(void)
+{
+  /* Sequencer initialization */
+  SEQ_Init();
+
+  /* Task registration */
+{{#each tasks_configuration}}
+
+  /* Register {{entry_function}} as a Sequencer task */
+  SEQ_RegTask(MX_TASK_{{uppercase task_name}}, 0, {{lowercase entry_function}});
+{{/each}}{{!tasks_configuration}}
+}
+
+/* Weak task function definitions --------------------------------------------*/
+
+{{#each tasks_configuration~}}
+__WEAK void {{lowercase entry_function}}(void)
+{
+  /* Task functions must return to allow the Sequencer to continue scheduling. */
+  return;
+}
+{{/each}}{{!tasks_configuration}}{{/with}}{{!additional}}{{/with}}{{!sequencer_cxt}}

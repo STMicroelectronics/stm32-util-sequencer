@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "version": "0.0.1",
+  "componentid": "::Utility:STM32CubeMX2 Config:SEQUENCER",
+  "type": "object",
+  "grammarVersion": "3.8.0",
+  "license": "Copyright (c) 2026 STMicroelectronics",
+  "properties": {
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "info": {
+          "type": "object",
+          "title": "General information",
+          "description": "Overview and requirements for the Sequencer utility.",
+          "properties": {
+            "information": {
+              "title": "Description",
+              "type": "string",
+              "description": "Brief overview of the Sequencer utility and its purpose.",
+              "actions": [
+                {
+                  "type": "disable",
+                  "condition": "true",
+                  "message": "This entry is displayed for information only and cannot be edited."
+                }
+              ],
+              "default": "The Sequencer utility is a lightweight cooperative scheduler designed for bare-metal applications that do not require a full real-time operating system. It provides a simple and efficient way to register, trigger, prioritize, and manage tasks while keeping software complexity, memory usage, and runtime overhead low."
+            },
+            "recommendation": {
+              "title": "Mandatory requirements",
+              "type": "string",
+              "actions": [
+                {
+                  "type": "disable",
+                  "condition": "true",
+                  "message": "This entry is displayed for information only and cannot be edited."
+                }
+              ],
+              "default": "Configure the required number of tasks and priority levels, then assign a valid task ID and entry function name to each task.",
+              "description": "The following requirements must be met before initializing the Sequencer. These steps are mandatory to ensure proper operation."
+            }
+          }
+        },
+        "basic": {
+          "title": "Main features",
+          "type": "object",
+          "properties": {
+            "priority": {
+              "title": "Priority levels",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 32,
+              "description": "Set the number of priority levels supported by the Sequencer (1-32).",
+              "default": 2
+            },
+            "task_nbr": {
+              "title": "Number of tasks",
+              "type": "integer",
+              "default": 2,
+              "minimum": 1,
+              "maximum": 32,
+              "description": "Set the number of tasks managed by the Sequencer (1-32)."
+            }
+          }
+        },
+        "additional": {
+          "title": "Advanced features",
+          "type": "object",
+          "properties": {
+            "tasks_configuration": {
+              "title": "Task definitions",
+              "type": "array",
+              "source": "Array.from({ length: (($basic.task_nbr >= 1 && $basic.task_nbr <= 32) ? $basic.task_nbr : 0) }, (_, i) => ({ id: ('TASK'+ (i + 1)) }))",
+              "itemId": "id",
+              "itemVar": "task",
+              "itemTitle": "TASK",
+              "description": "Configure the task ID and entry function for each task.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "task_name": {
+                    "title": "Task ID",
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 32,
+                    "actions": [
+                      {
+                        "type": "error",
+                        "condition": "!/^([a-zA-Z_][a-zA-Z0-9_]{2,31})?$/.test($value)",
+                        "message": "Task ID must be 3 to 32 characters long, start with a letter or underscore, and contain only letters, digits, or underscores."
+                      },
+                      {
+                        "type": "set",
+                        "condition": "true",
+                        "computed": {
+                          "default": "$task.id"
+                        }
+                      }
+                    ],
+                    "unique": "instance",
+                    "description": "Set the task identifier used for code generation. A macro named MX_TASK_<UPPERCASE_NAME> will be generated."
+                  },
+                  "entry_function": {
+                    "title": "Entry function",
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 32,
+                    "actions": [
+                      {
+                        "type": "error",
+                        "condition": "!/^([a-zA-Z_][a-zA-Z0-9_]{2,31})?$/.test($value)",
+                        "message": "Entry function name must be 3 to 32 characters long, start with a letter or underscore, and contain only letters, digits, or underscores."
+                      },
+                      {
+                        "type": "set",
+                        "condition": "true",
+                        "computed": {
+                          "default": "$task.id.toLowerCase() + '_function'"
+                        }
+                      }
+                    ],
+                    "unique": "instance",
+                    "description": "Set the function name called when the task is scheduled. A weak function will be generated and can be overridden in the application."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
