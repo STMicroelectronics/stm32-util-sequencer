@@ -7,6 +7,18 @@
       <stm32:pack type="UTILITY" friendlyName="sequencer" shortDesc="Sequencer utility">
         <relocation-info parent="utilities" layer="" element=""/>
         <compatibility>
+          <release version="2.1.2">
+            <applicable-schema schemaType="sw-configuration" schemaVersion="3.8.0"/>
+            <applicable-api-group apiType="codegen-getters">
+              <applicable-api apiType="SWConfigurationAPI" apiVersion="1.0.0" />
+            </applicable-api-group>
+          </release>
+          <release version="2.1.1">
+            <applicable-schema schemaType="sw-configuration" schemaVersion="3.8.0"/>
+            <applicable-api-group apiType="codegen-getters">
+              <applicable-api apiType="SWConfigurationAPI" apiVersion="1.0.0" />
+            </applicable-api-group>
+          </release>
           <release version="2.1.0">
             <applicable-schema schemaType="sw-configuration" schemaVersion="3.8.0"/>
             <applicable-api-group apiType="codegen-getters">
@@ -53,6 +65,12 @@
     <changelog id="Release Notes" name="Release_Notes.html"/>
   </changelogs>
   <releases>
+    <release version="2.1.2" date="2026-08-27">
+      Refer to Release_Notes.html for release details.
+    </release>
+    <release version="2.1.1" date="2026-07-02">
+      Refer to Release_Notes.html for release details.
+    </release>
     <release version="2.1.0" date="2026-06-12">
       Refer to Release_Notes.html for release details.
     </release>
